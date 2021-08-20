@@ -1,15 +1,8 @@
 import { Builder, Capabilities, By, until, WebDriver, WebElement } from "selenium-webdriver";
-import { CFAfindrestaurant } from "./CFAfindrestaurant";
+
 const fs = require("fs")
 const chromedriver = require("chromedriver");
 
-/** Optional parameters for the page object */
-interface Options {
-    /** if no driver is supplied, we make one */
-    driver?: WebDriver;
-    browser?: "chrome";
-    url?: string;
-}
 
 export class BasePage {
     driver: WebDriver;
@@ -28,7 +21,7 @@ export class BasePage {
     * This method navigates to the URL given
     * @param url - the website URL
     */
-    async navigate(url: string) {
+    async open(url: string) {
         await this.driver.get(url);
     }
 
@@ -97,6 +90,11 @@ export class BasePage {
         return element.getAttribute(attr);
     }
 
+
+    async sleep(secs: number) {
+        await this.driver.sleep(secs);
+    }
+
     /**
      * Maximize the driver window
      */
@@ -107,29 +105,8 @@ export class BasePage {
     /**
     * This method terminates the driver
     */
-    async quit() {
+    async close() {
         await this.driver.quit();
     }
 
-
-    /**
-    * Will take a screenshot and save it to the filepath/filename provided.
-    * Automatically saves as a .png file.
-    * @param {string} filepath - the filepath relative to the project's base folder where you want the screenshot saved
-    * @example
-    * page.takeScreenshot("myFolder_screenshot/screenshot1")
-    * //picture saves in "myFolder" as "screenshot1.png"
-    */
-    async takeScreenshot(filepath: string) {
-        fs.writeFile(
-            `${filepath}.png`,
-            await this.driver.takeScreenshot(),
-            "base64",
-            (e) => {
-                if (e) console.log(e);
-                else console.log("screenshot saved successfully");
-            }
-
-        )
-    }
 }
