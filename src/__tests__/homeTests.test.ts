@@ -36,7 +36,7 @@ describe("Testing the user interface and links...", () => {
     afterAll(async () => {
         await gs.close();
     });
-    test.skip("To confirm that the homepage url is correct", async () => {
+    test("To confirm that the homepage url is correct", async () => {
         expect(await gs.driver.getCurrentUrl()).toBe(gs.homeUrl);
         await gs.sleep(3000);
     });
@@ -47,20 +47,20 @@ describe("Testing the user interface and links...", () => {
             });
         });
     });*/
-    test.skip("To confirm selected item categories exist", async () => {
+    test("To confirm selected item categories exist", async () => {
         expect(await gs.isDisplayed(gs.videoGames)).toBe(true);
         expect(await gs.isDisplayed(gs.toys)).toBe(true);
         expect(await gs.isDisplayed(gs.clothing)).toBe(true);
         expect(await gs.isDisplayed(gs.collectibles)).toBe(true);
     });
     // PT3US-19 - User can use search bar to look for items
-    test.skip("Can display search results", async () => {
+    test("Can display search results", async () => {
         await gs.sendKeys(gs.topSearchBar, `${tark[0].term}\n`);
         let page = await gs.driver.getPageSource();
         expect(page).toContain(`${tark[0].foundItem}`);
     });
     // PT3US-18 - Search filters should appear onscreen after being clicked
-    test.skip("Filters appear inscreen after they are clicked", async () => {
+    test("Filters appear inscreen after they are clicked", async () => {
         await gs.click(gs.videoGames);
         await gs.waitClick(find.ps4, 1500); // 
         await gs.waitClick(find.preOrder, 1500);
@@ -68,7 +68,7 @@ describe("Testing the user interface and links...", () => {
         expect(await gs.isDisplayed(find.preOrdFilter)).toBe(true);
     });
     // PT3US-7 - User should be able to sort item prices in low to high order
-    test.skip("Can set item prices from low to high", async () => {
+    test("Can set item prices from low to high", async () => {
         await gs.click(gs.toys);
         await gs.click(find.sortButton);
         await gs.click(find.lowToHigh);
@@ -76,14 +76,14 @@ describe("Testing the user interface and links...", () => {
         expect(select).toBe("Price Low To High");
     });
     // PT3US-7 - User should be able to sort item prices in high to low order
-    test.skip("Can set item prices from low to high", async () => {
+    test("Can set item prices from low to high", async () => {
         await gs.click(gs.collectibles);
         await gs.click(find.sortButton);
         await gs.click(find.highToLow);
         let select = await gs.getAttribute(find.selectedOption, "innerText");
         expect(select).toBe("Price High To Low");
     });
-    test.skip("Can access the gift cards page", async () => {
+    test("Can access the gift cards page", async () => {
         await gs.click(gs.giftCards);
         let page = await gs.driver.getPageSource();
         expect(await gs.getUrl()).toBe(gcard.homeUrl)
@@ -95,7 +95,7 @@ describe("Testing the user interface and links...", () => {
         await gs.click(gcard.giftCardTitle);
         expect(await gs.isEnabled(gcard.addToCartBtn)).toBe(false);*/
     });
-    test.skip("Gift card amount must be between $10 and $500 - $9 (boundary)", async () => {
+    test("Gift card amount must be between $10 and $500 - $9 (boundary)", async () => {
         await gs.click(gs.giftCards);
         await gs.click(gcard.gsGiftCard);
         await gs.click(gcard.physGiftCard);
@@ -104,7 +104,7 @@ describe("Testing the user interface and links...", () => {
         await gs.click(gcard.giftCardTitle);
         expect(await gs.isDisplayed(gcard.addToCartDisabled)).toBe(true);
     });
-    test.skip("Gift card amount must be between $10 and $500 - $501 (boundary)", async () => {
+    test("Gift card amount must be between $10 and $500 - $501 (boundary)", async () => {
         await gs.click(gs.giftCards);
         await gs.click(gcard.gsGiftCard);
         await gs.click(gcard.physGiftCard);
@@ -113,7 +113,7 @@ describe("Testing the user interface and links...", () => {
         await gs.click(gcard.giftCardTitle);
         expect(await gs.isDisplayed(gcard.addToCartDisabled)).toBe(true);
     });
-    test.skip("Gift card amount must be between $10 and $500 - $250 ", async () => {
+    test("Gift card amount must be between $10 and $500 - $250 ", async () => {
         await gs.click(gs.giftCards);
         await gs.click(gcard.gsGiftCard);
         await gs.click(gcard.physGiftCard);
@@ -122,7 +122,7 @@ describe("Testing the user interface and links...", () => {
         await gs.click(gcard.giftCardTitle);
         expect(await gs.isDisplayed(gcard.addToCartBtn)).toBe(true);
     });
-    test.skip("Can figure out the trade-in value of a game", async () => {
+    test("Can figure out the trade-in value of a game", async () => {
         await gs.click(gs.tradeIns);
         await gs.sendKeys(trade.tradeInSearchBar, "ghosts");
         await gs.click(trade.tradeInBtn);
