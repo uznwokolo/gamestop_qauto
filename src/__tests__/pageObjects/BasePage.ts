@@ -119,4 +119,26 @@ export class BasePage {
         await this.driver.quit();
     }
 
+    async waitUntilFound(locator: By){
+        return this.driver.wait(until.elementLocated(locator), 5000); // timeout is 5 seconds
+    }
+
+    async getUrl() {
+        return this.driver.getCurrentUrl();
+    }
+
+    async isDisplayed(locator: By): Promise<boolean> {
+        return this.driver.findElement(locator).isDisplayed();
+    }
+
+    async waitClick(locator: By, time: number) {
+        await this.click(locator);
+        await this.sleep(time);
+    }
+
+    async getElementText(locator: By) {
+        await this.waitUntilFound(locator);
+        return this.getAttribute(locator, "innerText");
+    }
+
 }

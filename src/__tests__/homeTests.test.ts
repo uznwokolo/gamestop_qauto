@@ -4,6 +4,7 @@ import * as tark from "../data/terms.json";
 import { SearchOptions } from "./pageObjects/SearchOptions";
 import { GiftCards } from "./pageObjects/GiftCards";
 import { TradeIn } from "./pageObjects/TradeIn";
+import { Login } from "./pageObjects/Login";
 
 
 const driver = new Builder().withCapabilities(Capabilities.chrome()).build();
@@ -121,7 +122,7 @@ describe("Testing the user interface and links...", () => {
         await gs.click(gcard.giftCardTitle);
         expect(await gs.isDisplayed(gcard.addToCartBtn)).toBe(true);
     });
-    test("Can figure out the trade-in value of a game", async () => {
+    test.skip("Can figure out the trade-in value of a game", async () => {
         await gs.click(gs.tradeIns);
         await gs.sendKeys(trade.tradeInSearchBar, "ghosts");
         await gs.click(trade.tradeInBtn);
