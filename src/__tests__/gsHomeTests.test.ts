@@ -132,23 +132,5 @@ describe("Testing the user interface and links...", () => {
         expect(page).toContain("Cash");
         expect(page).toContain("Offer expires at the end of business day today");
     });
-    /*tark.forEach((loc) => {
-        test("Search terms display the corresponding results", async () => {
-            console.log(loc.term);
-            console.log(loc.foundItem);
-            //await gs.sendKeys(gs.topSearchBar, `${loc.term}\n`);
-            //let page = await gs.driver.getPageSource();
-            //expect(page).toContain(loc.foundItem);
-        });
-    });*/
-    // The website adds other hidden items that interfere with test results
-    /*test("Can display only results within a chosen price range", async () => {
-        await gs.sendKeys(gs.topSearchBar, `parappa\n`);
-        //let page = await gs.driver.getPageSource();
-        await gs.click(By.xpath("(//label[contains(text(),'$0 - $10')])[1]"))
-        //expect(page).toContain("Parappa the Rapper");
-        let prices: Array<WebElement> = await gs.driver.findElements(By.xpath("//span[@class='actual-price ']"));
-        console.log(prices); 
-        await gs.sleep(3000);
-    });*/
+    
 })
