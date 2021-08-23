@@ -47,6 +47,16 @@ export class BasePage {
     }
 
     /**
+     * This method clears the text from the element
+     * @param locator - the location of a web element
+     * @returns 
+     */
+    async clear(locator: By) {
+        await this.driver.wait(until.elementLocated(locator));
+        return (await this.driver.findElement(locator)).clear();
+    }
+
+    /**
     * This method returns the text in an element
     * @param locator - the position of the web element
     * @returns 
