@@ -1,4 +1,4 @@
-import { By, WebDriver, WebElement } from "selenium-webdriver"
+import { By, WebDriver, WebElement, until } from "selenium-webdriver"
 import { BasePage } from "./BasePage"
 
 
@@ -26,9 +26,8 @@ export class GamestopHome extends BasePage {
     toys: By = By.xpath("//p[contains(text(), 'Toys')]");
     clothing: By = By.xpath("//p[contains(text(), 'Clothing')]");
     collectibles: By = By.xpath("//p[contains(text(),'Collectibles')]");
-    // Gift card item
     
-
+    
 
     constructor(driver:WebDriver){
         super(driver);
@@ -48,10 +47,23 @@ export class GamestopHome extends BasePage {
     async isDisplayed(locator: By): Promise<boolean> {
         return this.driver.findElement(locator).isDisplayed();
     }
+    /*
+    async isDisplayedToo(locator: By): Promise<boolean> {
+        var result;
+        try {
+            result = this.driver.findElement(locator).isDisplayed();
+        }
+        catch(e: unknown) {
+            result = false;
+        }
+        return result;
+    } // tried catching NoSuchElementError with NoSuchLuck :(
+    */
 
+    /*
     async isEnabled(locator: By): Promise<boolean> {
         return this.driver.findElement(locator).isEnabled();
-    }
+    }*/
 
     async searchItem(value: string) {
         await this.sendKeys(this.topSearchBar, value);
@@ -60,5 +72,10 @@ export class GamestopHome extends BasePage {
     async waitClick(locator: By, time: number) {
         await this.click(locator);
         await this.sleep(time);
+    }
+
+    async getElementText(locator: By) {
+        await this.waitUntilFound(locator);
+        return this.getAttribute(locator, "innerText");
     }
 }
