@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Test automation project for GameStop (unofficial)",
   "main": "",
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": ["json","html"]
+  },
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "Uzoma Nwokolo",
