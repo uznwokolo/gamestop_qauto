@@ -24,17 +24,20 @@ describe("Testing the login features...", () => {
         await user.waitUntilFound(user.emailLogin);
         expect(await user.getUrl()).toBe(user.loginUrl);
     });
+    // PT3US-21 - User can sign in with valid credentials
     test("User can sign into their account", async () => {
         await user.login();
         await user.waitUntilFound(user.userAccount);
         expect(await user.isDisplayed(user.userAccount)).toBe(true);
     });
+    // PT3US-20 - A signed in user can see their name 
     test("User can confirm their first name", async () => {
         await home.click(user.userAccount);
         let fname = await home.getElementText(user.userFirstName);
         await user.click(user.closeAcctModal); // close modal
         expect(await user.firstname).toBe(fname);
     });
+    // PT3US-21 - User can sign in with valid credentials
     test("User can sign out of their account", async () => {
         await home.waitClick(user.userAccount, 500);
         //await user.waitUntilFound(user.signOutLink);

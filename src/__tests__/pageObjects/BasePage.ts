@@ -120,7 +120,7 @@ export class BasePage {
     }
 
     async waitUntilFound(locator: By){
-        return this.driver.wait(until.elementLocated(locator), 5000); // timeout is 5 seconds
+        return this.driver.wait(until.elementLocated(locator), 7000); // timeout is 7 seconds
     }
 
     async getUrl() {
@@ -132,7 +132,9 @@ export class BasePage {
     }
 
     async waitClick(locator: By, time: number) {
-        await this.click(locator);
+        await this.waitUntilFound(locator);
+        let ele = await this.getPageElement(locator);
+        await ele.click();
         await this.sleep(time);
     }
 
