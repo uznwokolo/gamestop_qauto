@@ -67,10 +67,6 @@ export class BuyOptions extends GamestopHome {
         let remove = await this.getRemoveLocator(item);
         (await this.waitUntilFound(remove)).click();
         return (await this.waitUntilFound(this.confirmRemove)).click();
-        /*while(await this.isDisplayed(this.removeItem)) {
-            await this.waitClick(this.removeItem, 1500);
-            await this.waitClick(this.confirmRemove, 1500);
-        }*/
     }
 
     

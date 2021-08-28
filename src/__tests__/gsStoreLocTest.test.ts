@@ -25,18 +25,21 @@ describe("Testing the store locator features...", () => {
         let storeLink: By =  await store.getStoreLink(branch[0].name);
         let storeMap: By = await store.getStoreMap(branch[0].name);
 
-        await xs.waitClick(store.changeStore, 2000);
+        await store.searchStoreByZip(String(branch[0].zip));
+        /* await xs.waitClick(store.changeStore, 2000);
         await xs.sendKeys(store.storeSearch, `${branch[0].zip}`);
         await xs.waitClick(store.searchBtn, 2000);
         await xs.waitClick(storeMap, 2000);
-        await xs.waitClick(store.setAsHomeBtn, 2000);
+        await xs.waitClick(store.setAsHomeBtn, 2000);*/
+        await store.selectHomeStore(branch[0].name);
         expect(await xs.isDisplayed(storeLink)).toBe(true);
     });
     // PT3US-11 - User can search for a Gamestop location with a zip code (unhappy path)
     test("No locations near a zip code gives no results", async () => {
-        await xs.waitClick(store.changeStore, 2000);
+        await store.searchStoreByZip(String(branch[3].zip));
+        /*await xs.waitClick(store.changeStore, 2000);
         await xs.sendKeys(store.storeSearch, `${branch[3].zip}`);
-        await xs.waitClick(store.searchBtn, 2000);
+        await xs.waitClick(store.searchBtn, 2000);*/
         //let page = await xs.driver.getPageSource();
         expect(await xs.isDisplayed(store.noResultsPage)).toBe(true);
     });

@@ -24,4 +24,23 @@ export class StoreLocator extends BasePage{
         return sMap;
     }
 
+    async getStoreMapAndLink(val: string) {
+        let sMap: By = By.xpath(`//a[@class='store-map']/h2[contains(text(),'${val}')]`);
+        let sLink: By = By.xpath(`//span[contains(@class, 'store-name') and contains(text(), '${val}')]`);
+        return [sMap, sLink];
+    }
+
+    async searchStoreByZip(zip: string) {
+        await this.waitClick(this.changeStore, 2000);
+        await this.sendKeys(this.storeSearch, `${zip}`);
+        await this.waitClick(this.searchBtn, 2000);
+    }
+
+    async selectHomeStore(name: string) {
+        let [storeNameLocator, homeStoreLink] = await this.getStoreMapAndLink(name);
+        await this.waitClick(storeNameLocator, 2000);
+        await this.waitClick(homeStoreLink, 2000);
+    }
+
+
 }
